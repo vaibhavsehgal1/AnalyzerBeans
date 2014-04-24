@@ -19,6 +19,8 @@
  */
 package org.eobjects.analyzer.beans.api;
 
+import org.eobjects.analyzer.beans.api.OutputColumns;
+
 import junit.framework.TestCase;
 
 public class OutputColumnsTest extends TestCase {

@@ -25,12 +25,12 @@ import java.io.ObjectInputStream;
 import java.util.List;
 
 import org.eobjects.analyzer.util.ReadObjectBuilder;
-import org.eobjects.metamodel.UpdateableDataContext;
-import org.eobjects.metamodel.csv.CsvConfiguration;
-import org.eobjects.metamodel.csv.CsvDataContext;
-import org.eobjects.metamodel.util.FileHelper;
-import org.eobjects.metamodel.util.Resource;
-import org.eobjects.metamodel.util.SerializableRef;
+import org.apache.metamodel.UpdateableDataContext;
+import org.apache.metamodel.csv.CsvConfiguration;
+import org.apache.metamodel.csv.CsvDataContext;
+import org.apache.metamodel.util.FileHelper;
+import org.apache.metamodel.util.Resource;
+import org.apache.metamodel.util.SerializableRef;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

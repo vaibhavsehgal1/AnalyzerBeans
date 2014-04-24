@@ -7,8 +7,8 @@ import org.eobjects.analyzer.result.renderer.CrosstabTextRenderer
 import org.junit.Assert
 import org.eobjects.analyzer.storage.InMemoryRowAnnotationFactory
 import java.util.Date
-import org.eobjects.metamodel.util.DateUtils
-import org.eobjects.metamodel.util.Month
+import org.apache.metamodel.util.DateUtils
+import org.apache.metamodel.util.Month
 
 class DateAndTimeAnalyzerScalaTest extends AssertionsForJUnit {
 

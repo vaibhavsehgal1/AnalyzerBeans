@@ -27,7 +27,7 @@ import org.eobjects.analyzer.data.InputColumn;
 import org.eobjects.analyzer.data.MutableInputColumn;
 import org.eobjects.analyzer.descriptors.ComponentDescriptor;
 
-import org.eobjects.metamodel.util.BaseObject;
+import org.apache.metamodel.util.BaseObject;
 
 public final class ImmutableMergedOutcomeJob extends BaseObject implements MergedOutcomeJob {
 	

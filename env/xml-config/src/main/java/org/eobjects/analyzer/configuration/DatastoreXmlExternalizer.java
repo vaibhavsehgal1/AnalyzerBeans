@@ -25,8 +25,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.eobjects.analyzer.connection.CsvDatastore;
 import org.eobjects.analyzer.connection.ExcelDatastore;
 import org.eobjects.analyzer.util.StringUtils;
-import org.eobjects.metamodel.csv.CsvConfiguration;
-import org.eobjects.metamodel.util.Resource;
+import org.apache.metamodel.csv.CsvConfiguration;
+import org.apache.metamodel.util.Resource;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

@@ -47,8 +47,8 @@ import org.eobjects.analyzer.job.runner.RowProcessingPublishers;
 import org.eobjects.analyzer.job.tasks.Task;
 import org.eobjects.analyzer.lifecycle.LifeCycleHelper;
 import org.eobjects.analyzer.util.SourceColumnFinder;
-import org.eobjects.metamodel.schema.Table;
-import org.eobjects.metamodel.util.SharedExecutorService;
+import org.apache.metamodel.schema.Table;
+import org.apache.metamodel.util.SharedExecutorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

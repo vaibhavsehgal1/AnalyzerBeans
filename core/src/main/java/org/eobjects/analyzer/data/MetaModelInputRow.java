@@ -22,9 +22,9 @@ package org.eobjects.analyzer.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eobjects.metamodel.data.Row;
-import org.eobjects.metamodel.query.SelectItem;
-import org.eobjects.metamodel.schema.Column;
+import org.apache.metamodel.data.Row;
+import org.apache.metamodel.query.SelectItem;
+import org.apache.metamodel.schema.Column;
 
 public final class MetaModelInputRow extends AbstractInputRow {
 

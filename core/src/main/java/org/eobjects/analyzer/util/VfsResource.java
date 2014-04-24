@@ -25,11 +25,11 @@ import java.io.OutputStream;
 import org.apache.commons.vfs2.FileContent;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
-import org.eobjects.metamodel.util.Action;
-import org.eobjects.metamodel.util.FileHelper;
-import org.eobjects.metamodel.util.Func;
-import org.eobjects.metamodel.util.Resource;
-import org.eobjects.metamodel.util.ResourceException;
+import org.apache.metamodel.util.Action;
+import org.apache.metamodel.util.FileHelper;
+import org.apache.metamodel.util.Func;
+import org.apache.metamodel.util.Resource;
+import org.apache.metamodel.util.ResourceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -172,6 +172,11 @@ public class VfsResource implements Resource {
         } catch (Exception e) {
             throw new ResourceException(this, e);
         }
+    }
+
+    @Override
+    public String getQualifiedPath() {
+        return _fileObject.getName().getURI();
     }
 
 }

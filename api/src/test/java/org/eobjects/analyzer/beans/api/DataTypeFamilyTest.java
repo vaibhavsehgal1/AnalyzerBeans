@@ -23,6 +23,7 @@ import java.util.Date;
 
 import junit.framework.TestCase;
 
+import org.eobjects.analyzer.beans.api.FileProperty;
 import org.eobjects.analyzer.data.DataTypeFamily;
 
 @SuppressWarnings("deprecation")

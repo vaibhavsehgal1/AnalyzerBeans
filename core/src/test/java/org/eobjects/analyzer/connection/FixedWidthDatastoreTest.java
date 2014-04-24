@@ -21,8 +21,8 @@ package org.eobjects.analyzer.connection;
 
 import java.util.Arrays;
 
-import org.eobjects.metamodel.schema.Schema;
-import org.eobjects.metamodel.schema.Table;
+import org.apache.metamodel.schema.Schema;
+import org.apache.metamodel.schema.Table;
 
 import junit.framework.TestCase;
 
@@ -52,10 +52,10 @@ public class FixedWidthDatastoreTest extends TestCase {
 		DatastoreConnection con = ds.openConnection();
 
 		Schema schema = con.getDataContext().getDefaultSchema();
-		assertEquals("employees-fixed-width.txt", schema.getName());
+		assertEquals("resources", schema.getName());
 
 		Table table = schema.getTables()[0];
-		assertEquals("employees-fixed-width", table.getName());
+		assertEquals("employees-fixed-width.txt", table.getName());
 
 		assertEquals("[name, email]", Arrays.toString(table.getColumnNames()));
 

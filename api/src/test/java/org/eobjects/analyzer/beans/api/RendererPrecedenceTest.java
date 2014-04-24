@@ -19,6 +19,8 @@
  */
 package org.eobjects.analyzer.beans.api;
 
+import org.eobjects.analyzer.beans.api.RendererPrecedence;
+
 import junit.framework.TestCase;
 
 public class RendererPrecedenceTest extends TestCase {

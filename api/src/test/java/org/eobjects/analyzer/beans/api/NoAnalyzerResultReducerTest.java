@@ -22,6 +22,7 @@ package org.eobjects.analyzer.beans.api;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
+import org.eobjects.analyzer.beans.api.NoAnalyzerResultReducer;
 import org.eobjects.analyzer.result.AnalyzerResult;
 
 import junit.framework.TestCase;

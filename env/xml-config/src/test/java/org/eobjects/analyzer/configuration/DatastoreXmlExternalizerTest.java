@@ -32,7 +32,7 @@ import junit.framework.TestCase;
 
 import org.eobjects.analyzer.connection.CsvDatastore;
 import org.eobjects.analyzer.connection.ExcelDatastore;
-import org.eobjects.metamodel.util.FileResource;
+import org.apache.metamodel.util.FileResource;
 import org.w3c.dom.Element;
 
 public class DatastoreXmlExternalizerTest extends TestCase {
