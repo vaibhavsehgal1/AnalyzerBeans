@@ -6,7 +6,7 @@
 		<javadoc.version>2.9.1</javadoc.version>
 		<slf4j.version>1.7.6</slf4j.version>
 		<junit.version>4.11</junit.version>
-		<metamodel.version>4.0.0-incubating</metamodel.version>
+		<metamodel.version>4.0.1-incubating-SNAPSHOT</metamodel.version>
 		<metamodel.extras.version>4.0.0-SNAPSHOT</metamodel.extras.version>
 		<easymock.version>3.2</easymock.version>
 		<scala.version>2.10.3</scala.version>
@@ -192,6 +192,8 @@
 								<bannedDependencies>
 									<excludes>
 										<exclude>commons-logging:commons-logging</exclude>
+										<exclude>org.slf4j:slf4j-log4j12:*:jar:compile</exclude>
+										<exclude>log4j:log4j:*:jar:compile</exclude>
 										<exclude>com.google.collections:google-collections</exclude>
 										<exclude>javax.servlet:servlet-api:*:jar:compile</exclude>
 										<exclude>org.mortbay.jetty:servlet-api:*:*:compile</exclude>
