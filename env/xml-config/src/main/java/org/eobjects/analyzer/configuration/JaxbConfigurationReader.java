@@ -64,6 +64,7 @@ import org.eobjects.analyzer.configuration.jaxb.ExcelDatastoreType;
 import org.eobjects.analyzer.configuration.jaxb.FixedWidthDatastoreType;
 import org.eobjects.analyzer.configuration.jaxb.FixedWidthDatastoreType.WidthSpecification;
 import org.eobjects.analyzer.configuration.jaxb.H2StorageProviderType;
+import org.eobjects.analyzer.configuration.jaxb.HbaseDatastoreType;
 import org.eobjects.analyzer.configuration.jaxb.HsqldbStorageProviderType;
 import org.eobjects.analyzer.configuration.jaxb.InMemoryStorageProviderType;
 import org.eobjects.analyzer.configuration.jaxb.JdbcDatastoreType;
@@ -100,6 +101,7 @@ import org.eobjects.analyzer.connection.DatastoreCatalogImpl;
 import org.eobjects.analyzer.connection.DbaseDatastore;
 import org.eobjects.analyzer.connection.ExcelDatastore;
 import org.eobjects.analyzer.connection.FixedWidthDatastore;
+import org.eobjects.analyzer.connection.HBaseDatastore;
 import org.eobjects.analyzer.connection.JdbcDatastore;
 import org.eobjects.analyzer.connection.MongoDbDatastore;
 import org.eobjects.analyzer.connection.OdbDatastore;
@@ -634,6 +636,8 @@ public final class JaxbConfigurationReader implements ConfigurationReader<InputS
                 ds = createDatastore(name, (OpenOfficeDatabaseDatastoreType) datastoreType);
             } else if (datastoreType instanceof PojoDatastoreType) {
                 ds = createDatastore(name, (PojoDatastoreType) datastoreType);
+            } else if (datastoreType instanceof HbaseDatastoreType) {
+                ds = createDatastore(name, (HbaseDatastoreType) datastoreType);
             } else if (datastoreType instanceof CouchdbDatastoreType) {
                 ds = createDatastore(name, (CouchdbDatastoreType) datastoreType);
             } else if (datastoreType instanceof MongodbDatastoreType) {
@@ -690,6 +694,17 @@ public final class JaxbConfigurationReader implements ConfigurationReader<InputS
 
         final DatastoreCatalogImpl result = new DatastoreCatalogImpl(datastores.values());
         return result;
+    }
+
+    /**
+     * @param name
+     * @param datastoreType
+     * @return
+     */
+    private Datastore createDatastore(String name, HbaseDatastoreType datastoreType) {
+        String hostname = getStringVariable("zookeeperHostname", datastoreType.getZookeeperHostname());
+        Integer port = getIntegerVariable("zookeeperPort", datastoreType.getZookeeperPort());
+        return new HBaseDatastore(name, hostname, port);
     }
 
     private Datastore createDatastore(String name, SalesforceDatastoreType datastoreType) {

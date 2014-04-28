@@ -262,6 +262,7 @@
 						</documentation>
 					</annotation>
 				</element>
+				<element name="hbase-datastore" type="ab:hbaseDatastoreType" />
 				<element name="composite-datastore" type="ab:compositeDatastoreType">
 					<annotation>
 						<documentation>
@@ -399,6 +400,19 @@
 					<element name="password" type="string" minOccurs="1"
 						maxOccurs="1" />
 				</all>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="hbaseDatastoreType">
+		<complexContent>
+			<extension base="ab:abstractDatastoreType">
+				<sequence>
+					<element name="zookeeper-hostname" minOccurs="0" maxOccurs="1"
+						type="string" />
+					<element name="zookeeper-port" minOccurs="0" maxOccurs="1"
+						type="int" />
+				</sequence>
 			</extension>
 		</complexContent>
 	</complexType>
