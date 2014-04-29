@@ -40,6 +40,10 @@ public class HBaseDatastore extends UsageAwareDatastore<HBaseDataContext> {
     private final String _zookeeperHostname;
     private final SimpleTableDef[] _tableDefs;
 
+    public HBaseDatastore(String name, String zookeeperHostname, int zookeeperPort) {
+        this(name, zookeeperHostname, zookeeperPort, null);
+    }
+    
     public HBaseDatastore(String name, String zookeeperHostname, int zookeeperPort, SimpleTableDef[] tableDefs) {
         super(name);
         _datastoreName = name;
