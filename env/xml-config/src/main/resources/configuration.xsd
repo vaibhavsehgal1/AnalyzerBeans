@@ -403,7 +403,7 @@
 			</extension>
 		</complexContent>
 	</complexType>
-	
+
 	<complexType name="hbaseDatastoreType">
 		<complexContent>
 			<extension base="ab:abstractDatastoreType">
@@ -412,6 +412,24 @@
 						type="string" />
 					<element name="zookeeper-port" minOccurs="0" maxOccurs="1"
 						type="int" />
+					<element name="table-def" minOccurs="0" maxOccurs="unbounded">
+						<complexType>
+							<sequence>
+								<element name="column-family" minOccurs="1" maxOccurs="1"
+									type="string" />
+								<element name="column" minOccurs="1" maxOccurs="unbounded">
+									<complexType>
+										<sequence>
+											<element name="name" minOccurs="1" maxOccurs="1"
+												type="string" />
+											<element name="type" minOccurs="0" maxOccurs="1"
+												type="normalizedString" />
+										</sequence>
+									</complexType>
+								</element>
+							</sequence>
+						</complexType>
+					</element>
 				</sequence>
 			</extension>
 		</complexContent>

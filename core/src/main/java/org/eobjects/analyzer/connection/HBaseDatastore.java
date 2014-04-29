@@ -23,6 +23,8 @@ import java.util.List;
 
 import org.apache.metamodel.hbase.HBaseConfiguration;
 import org.apache.metamodel.hbase.HBaseDataContext;
+import org.apache.metamodel.schema.ColumnType;
+import org.apache.metamodel.util.SimpleTableDef;
 
 /**
  * Datastore implementation for HBase.
@@ -33,13 +35,17 @@ public class HBaseDatastore extends UsageAwareDatastore<HBaseDataContext> {
 
     private static final long serialVersionUID = 1L;
     
+    private final String _datastoreName;
     private final int _zookeeperPort;
     private final String _zookeeperHostname;
+    private final SimpleTableDef[] _tableDefs;
 
-    public HBaseDatastore(String name, String zookeeperHostname, int zookeeperPort) {
+    public HBaseDatastore(String name, String zookeeperHostname, int zookeeperPort, SimpleTableDef[] tableDefs) {
         super(name);
+        _datastoreName = name;
         _zookeeperHostname = zookeeperHostname;
         _zookeeperPort = zookeeperPort;
+        _tableDefs = tableDefs;
     }
     
     @Override
@@ -54,9 +60,13 @@ public class HBaseDatastore extends UsageAwareDatastore<HBaseDataContext> {
 
     @Override
     protected UsageAwareDatastoreConnection<HBaseDataContext> createDatastoreConnection() {
-        HBaseConfiguration hBaseConfiguration = new HBaseConfiguration(_zookeeperHostname, _zookeeperPort);
+        HBaseConfiguration hBaseConfiguration = new HBaseConfiguration("HBase", _zookeeperHostname, _zookeeperPort, _tableDefs, ColumnType.VARCHAR);
         HBaseDataContext hBaseDataContext = new HBaseDataContext(hBaseConfiguration);
         return new DatastoreConnectionImpl<HBaseDataContext>(hBaseDataContext, this);
+    }
+    
+    public String getDatastoreName() {
+        return _datastoreName;
     }
     
     public String getZookeeperHostname() {
@@ -65,6 +75,10 @@ public class HBaseDatastore extends UsageAwareDatastore<HBaseDataContext> {
     
     public int getZookeeperPort() {
         return _zookeeperPort;
+    }
+    
+    public SimpleTableDef[] getTableDefs() {
+        return _tableDefs;
     }
     
     @Override

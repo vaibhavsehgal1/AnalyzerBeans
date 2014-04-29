@@ -42,6 +42,14 @@ import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
+import org.apache.metamodel.csv.CsvConfiguration;
+import org.apache.metamodel.fixedwidth.FixedWidthConfiguration;
+import org.apache.metamodel.schema.ColumnType;
+import org.apache.metamodel.schema.TableType;
+import org.apache.metamodel.util.FileHelper;
+import org.apache.metamodel.util.Resource;
+import org.apache.metamodel.util.SimpleTableDef;
+import org.apache.metamodel.xml.XmlSaxTableDef;
 import org.eobjects.analyzer.beans.api.RenderingFormat;
 import org.eobjects.analyzer.configuration.jaxb.AbstractDatastoreType;
 import org.eobjects.analyzer.configuration.jaxb.AccessDatastoreType;
@@ -143,14 +151,6 @@ import org.eobjects.analyzer.util.JaxbValidationEventHandler;
 import org.eobjects.analyzer.util.ReflectionUtils;
 import org.eobjects.analyzer.util.StringUtils;
 import org.eobjects.analyzer.util.convert.StringConverter;
-import org.apache.metamodel.csv.CsvConfiguration;
-import org.apache.metamodel.fixedwidth.FixedWidthConfiguration;
-import org.apache.metamodel.schema.ColumnType;
-import org.apache.metamodel.schema.TableType;
-import org.apache.metamodel.util.FileHelper;
-import org.apache.metamodel.util.Resource;
-import org.apache.metamodel.util.SimpleTableDef;
-import org.apache.metamodel.xml.XmlSaxTableDef;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -704,7 +704,39 @@ public final class JaxbConfigurationReader implements ConfigurationReader<InputS
     private Datastore createDatastore(String name, HbaseDatastoreType datastoreType) {
         String hostname = getStringVariable("zookeeperHostname", datastoreType.getZookeeperHostname());
         Integer port = getIntegerVariable("zookeeperPort", datastoreType.getZookeeperPort());
-        return new HBaseDatastore(name, hostname, port);
+        
+        List<org.eobjects.analyzer.configuration.jaxb.HbaseDatastoreType.TableDef> tableDefList = datastoreType
+                .getTableDef();
+        final SimpleTableDef[] tableDefs;
+        if (tableDefList.isEmpty()) {
+            tableDefs = null;
+        } else {
+            tableDefs = new SimpleTableDef[tableDefList.size()];
+            for (int i = 0; i < tableDefs.length; i++) {
+                org.eobjects.analyzer.configuration.jaxb.HbaseDatastoreType.TableDef tableDef = tableDefList.get(i);
+                String columnFamily = tableDef.getColumnFamily();
+                List<org.eobjects.analyzer.configuration.jaxb.HbaseDatastoreType.TableDef.Column> columnList = tableDef
+                        .getColumn();
+                String[] columnNames = new String[columnList.size()];
+                ColumnType[] columnTypes = new ColumnType[columnList.size()];
+                for (int j = 0; j < columnTypes.length; j++) {
+                    String columnName = columnList.get(j).getName();
+                    String columnTypeName = columnList.get(j).getType();
+                    final ColumnType columnType;
+                    if (StringUtils.isNullOrEmpty(columnTypeName)) {
+                        columnType = ColumnType.VARCHAR;
+                    } else {
+                        columnType = ColumnType.valueOf(columnTypeName);
+                    }
+                    columnNames[j] = columnName;
+                    columnTypes[j] = columnType;
+                }
+
+                tableDefs[i] = new SimpleTableDef(columnFamily, columnNames, columnTypes);
+            }
+        }
+        
+        return new HBaseDatastore(name, hostname, port, tableDefs);
     }
 
     private Datastore createDatastore(String name, SalesforceDatastoreType datastoreType) {
