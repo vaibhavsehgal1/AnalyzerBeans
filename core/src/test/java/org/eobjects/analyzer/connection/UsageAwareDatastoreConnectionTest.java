@@ -83,7 +83,7 @@ public class UsageAwareDatastoreConnectionTest extends TestCase {
 	}
 
 	public void testCloseNoRaceConditions() throws Exception {
-		final int threadCount = 5000;
+		final int threadCount = 500;
 		final Thread[] threads = new Thread[threadCount];
 		final AtomicInteger raceConditions = new AtomicInteger();
 
