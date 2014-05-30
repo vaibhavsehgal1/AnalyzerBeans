@@ -131,6 +131,10 @@
 					<groupId>commons-httpclient</groupId>
 					<artifactId>commons-httpclient</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jdt</groupId>
+					<artifactId>core</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 
